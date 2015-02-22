@@ -1,0 +1,31 @@
+Sentry project
+https://github.com/slafs/sentry-docker
+
+To run the Sentry container
+1. cd /vagrant/docker/sentry
+2. sudo fig build sentry
+3. sudo fig up -d sentry
+
+Add the following to your hosts file
+192.168.33.10 sentry.vagrant.com
+
+Go to the web site
+http://sentry.vagrant.com:8080
+
+The username and password are admin/admin
+
+Create "Organization Name": company1
+Create a team: team1
+Create a project: project1
+
+The log files and sqlite database are in
+/vagrant/docker/sentry/sentry_data
+
+4. sudo fig stop sentry
+5. sudo fig rm sentry
+
+
+Need to add  -L 80:192.168.33.10:80 to ssh forwarding
+
+Need to use an old version as the new version does not install correctly
+pip install raven==4.2.3

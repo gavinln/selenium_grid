@@ -1,0 +1,7 @@
+*~
+*.pyc
+*.class
+*.swp
+.vagrant
+.ipynb_checkpoints
+sentry_data/

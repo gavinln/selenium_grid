@@ -1,0 +1,81 @@
+Install ODBC Driver Manager
+http://technet.microsoft.com/en-us/library/hh568449%28v=sql.110%29.aspx
+
+Install the Microsoft ODBC Driver for SQL
+http://technet.microsoft.com/en-us/library/hh568454%28v=sql.110%29.aspx
+
+Install the driver on Ubuntu
+http://onefinepub.com/2014/03/installing-unixodbc-2-3-2-higher-ubuntu-12-04-lts/
+
+Issues when using the driver
+http://stackoverflow.com/questions/20079470/pyodbc-error-unixodbc-cant-open-microsoft-odbc-driver-running-on-apache-rhel
+http://www-01.ibm.com/support/docview.wss?uid=swg21655468
+http://stackoverflow.com/questions/426230/what-is-the-ld-preload-trick
+
+Install ODBC driver
+1. Copy Microsoft ODBC driver
+cp /vagrant/odbc_driver/msodbcsql-11.0.2270.0.tar.gz .
+
+2. Extract the driver
+tar xvzf msodbcsql-11.0.2270.0.tar.gz
+
+3. Change to the driver directory
+cd msodbcsql-11.0.2270.0/
+
+4. Copy Unix ODBC driver manager
+cp /vagrant/odbc_driver/unixODBC-2.3.0.tar.gz .
+
+5. Get script customized for Ubuntu
+#wget https://raw.github.com/Andrewpk/Microsoft--SQL-Server--ODBC-Driver-1.0-for-Linux-Fixed-Install-Scripts/master/build_dm.sh -O ubuntu_build_dm.sh
+cp /vagrant/odbc_driver/ubuntu_build_dm.sh .
+
+6. Make build script executable
+chmod +x ubuntu_build_dm.sh
+
+5.Run script
+# options --help, --download-url, --prefix, --libdir, --sysconfdir
+# need to make sure /tmp/unixODBC does not exist
+./ubuntu_build_dm.sh --accept-warning --download-url=file://unixODBC-2.3.0.tar.gz
+
+6. Search for a directory 
+UNIX_ODBC_DIR=`find /tmp -name unixODBC-2.3.0`
+cd $ODBC_INSTALL_DIR
+
+7. Install the Unix ODBC driver manager
+sudo make install
+
+Install ODBC driver
+1. Change to the ODBC driver directory
+cd ~/msodbcsql-11.0.2270.0/
+
+2. Get modified install scripts
+#wget https://raw.githubusercontent.com/Andrewpk/Microsoft--SQL-Server--ODBC-Driver-1.0-for-Linux-Fixed-Install-Scripts/master/install.sh -O ubuntu_install.sh
+cp /vagrant/odbc_driver/ubuntu_install.sh .
+
+3. Make script executable
+chmod +x ubuntu_install.sh
+
+4. Check setup
+./ubuntu_install.sh verify
+
+5. Install the driver
+sudo ./ubuntu_install.sh install --accept-license
+
+To install pyodbc
+1. Install tools to compile code
+sudo apt-get install -y python-dev
+
+2. Install the pyodbc package
+sudo pip install --allow-external pyodbc --allow-unverified pyodbc pyodbc
+
+To find out the location of ODBC files
+odbcinst -j
+
+LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib64
+export LD_LIBRARY_PATH
+
+Link libraries
+# try ldd /opt/microsoft/msodbcsql/lib64/libmsodbcsql-11.0.so.2270.0 to find missing links
+sudo ln -s /lib/x86_64-linux-gnu/libcrypto.so.1.0.0 /usr/lib64/libcrypto.so.10
+sudo ln -s /lib/x86_64-linux-gnu/libssl.so.1.0.0 /usr/lib64/libssl.so.10
+
