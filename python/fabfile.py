@@ -11,8 +11,8 @@ script_dir = os.path.dirname(__file__)
 
 
 @task
-def start_node():
-    ''' start node '''
+def start_hub_node():
+    ''' start hub & node '''
     selenium_root = os.path.normpath(
         os.path.join(script_dir, '..', 'docker', 'selenium'))
     with lcd(selenium_root):
@@ -20,8 +20,8 @@ def start_node():
 
 
 @task
-def stop_node():
-    ''' stop node '''
+def stop_hub_node():
+    ''' stop hub & node '''
     selenium_root = os.path.normpath(
         os.path.join(script_dir, '..', 'docker', 'selenium'))
     with lcd(selenium_root):
