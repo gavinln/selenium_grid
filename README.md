@@ -4,18 +4,18 @@ ubuntu_docker
 * Source code - [Github][1]
 * Author - Gavin Noronha - <gavinln@hotmail.com>
 
-[1]: https://github.com/gavinln/ubuntu_docker.git
+[1]: https://github.com/gavinln/selenium_grid.git
 
 About
 -----
 
 This project provides a [Ubuntu (14.04)][2] [Vagrant][3] Virtual Machine (VM)
-with [Docker][4] containers to host [IPython notebook][5] servers.
+with [Docker][4] containers to host a [Selenium Grid][5] with Chrome.
 
 [2]: http://releases.ubuntu.com/14.04/
 [3]: http://www.vagrantup.com/
 [4]: https://www.docker.com/
-[5]: http://ipython.org/notebook.html
+[5]: https://code.google.com/p/selenium/wiki/Grid2
 
 There are [Puppet][6] scripts that automatically install the software when the VM is started.
 
@@ -36,51 +36,60 @@ Running
     vagrant ssh
     ```
 
-3. Go to the IPython notebook Docker container directory
+3. Go to the Selenium Docker container directory
 
     ```bash
-    cd /vagrant/docker/ipython
+    cd /vagrant/docker/selenium
     ```
 
-4. Build the IPython notebook Docker container
+4. Get the base Docker image
 
     ```bash
-    sudo fig build notebook
+    sudo docker pull ubuntu:14.04
     ```
 
-5. Run the IPython notebook Docker container
+5. Pull the latest Selenium images
 
     ```bash
-    sudo fig up -d notebook
+    sudo fig pull
     ```
 
-6. To view the running containers
+6. Change to the Python driver program directory
 
     ```bash
-    sudo fig ps
+    cd /vagrant/python
     ```
 
-7. Open the browser to the IPython notebook page
-http://localhost:PORT_IN_STEP_6/
-
-
-8. To see the logs from the IPython notebook container
+7. Start the Selenium hub & node
 
     ```bash
-    sudo fig logs notebook
+    fab start_hub_node
     ```
 
-9. To stop display of the logs type `Ctrl+C`.
-
-10. To stop the Docker IPython notebook container
+8. Run the Selenium test (takes about 5 seconds)
 
     ```bash
-    sudo fig kill notebook
+    fab run_test
     ```
-11. To remove the notebook Docker container
+
+9. Stop the Selenium hub & node
 
     ```bash
-    sudo fig rm notebook
+    fab stop_hub_node
+    ```
+
+10. Type `exit` to quit the virtual machine
+
+11. To halt the VM type (fast to startup after a halt command)
+
+    ```
+    vagrant halt
+    ```
+
+12. To destroy the VM (slow to create VM after a destroy command)
+
+    ```
+    vagrant destroy
     ```
 
 Requirements
