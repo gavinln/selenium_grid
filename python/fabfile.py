@@ -9,23 +9,45 @@ import yaml
 
 script_dir = os.path.dirname(__file__)
 
+def get_selenium_root():
+    return os.path.normpath(
+        os.path.join(script_dir, '..', 'docker', 'selenium'))
+
 
 @task
-def start_hub_node():
+def grid_start():
     ''' start hub & node '''
-    selenium_root = os.path.normpath(
-        os.path.join(script_dir, '..', 'docker', 'selenium'))
-    with lcd(selenium_root):
-        local('sudo fig up -d')
+    with lcd(get_selenium_root()):
+        local('sudo fig up -d hub node')
+        local('sudo fig ps node')
 
 
 @task
-def stop_hub_node():
+def grid_stop():
     ''' stop hub & node '''
-    selenium_root = os.path.normpath(
-        os.path.join(script_dir, '..', 'docker', 'selenium'))
-    with lcd(selenium_root):
-        local('sudo fig stop')
+    with lcd(get_selenium_root()):
+        local('sudo fig stop hub node')
+
+
+@task
+def selenium_start():
+    ''' start selenium standalone '''
+    with lcd(get_selenium_root()):
+        local('sudo fig up -d selenium')
+
+
+@task
+def selenium_stop():
+    ''' stop hub & node '''
+    with lcd(get_selenium_root()):
+        local('sudo fig stop selenium')
+
+
+@task
+def status():
+    ''' stop hub & node '''
+    with lcd(get_selenium_root()):
+        local('sudo fig ps')
 
 
 @task

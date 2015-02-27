@@ -4,8 +4,13 @@ hub:
         - "4444:4444"
 
 node:
-    image: selenium/node-chrome:2.44.0
+    image: selenium/node-chrome-debug:2.44.0
     links:
         - "hub:hub"
     ports:
         - "5900"
+
+selenium:
+    image: selenium/standalone-chrome:2.44.0
+    ports:
+        - "4444:4444"
