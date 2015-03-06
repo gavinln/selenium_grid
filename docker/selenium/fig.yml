@@ -8,9 +8,9 @@ node:
     links:
         - "hub:hub"
     ports:
-        - "5900"
+        - "5900:5900"
 
-selenium:
+standalone:
     image: selenium/standalone-chrome:2.44.0
     ports:
         - "4444:4444"

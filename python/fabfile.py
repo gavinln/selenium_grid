@@ -30,17 +30,17 @@ def grid_stop():
 
 
 @task
-def selenium_start():
+def standalone_start():
     ''' start selenium standalone '''
     with lcd(get_selenium_root()):
-        local('sudo fig up -d selenium')
+        local('sudo fig up -d standalone')
 
 
 @task
-def selenium_stop():
-    ''' stop hub & node '''
+def standalone_stop():
+    ''' stop selenium standalone '''
     with lcd(get_selenium_root()):
-        local('sudo fig stop selenium')
+        local('sudo fig stop standalone')
 
 
 @task

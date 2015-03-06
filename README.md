@@ -42,51 +42,72 @@ Running
     cd /vagrant/docker/selenium
     ```
 
-4. Get the base Docker image
-
-    ```bash
-    sudo docker pull ubuntu:14.04
-    ```
-
-5. Pull the latest Selenium images
+4. Pull the latest Selenium images
 
     ```bash
     sudo fig pull
     ```
 
-6. Change to the Python driver program directory
+5. Change to the Python driver program directory
 
     ```bash
     cd /vagrant/python
     ```
 
-7. Start the Selenium hub & node
+6. Start the Selenium grid (hub & node)
 
     ```bash
-    fab start_hub_node
+    fab grid_start
     ```
 
-8. Run the Selenium test (takes about 5 seconds)
+7. Open VNC to 192.168.33.10:5900 (password: secret)
+
+8. Open the browser to http://192.168.33.10:4444/grid/console
+
+9. Run the Selenium test (takes about 5 seconds). Refresh the browser in step
+   8 to see the available webdriver being used when the test is run.
 
     ```bash
     fab run_test
     ```
 
-9. Stop the Selenium hub & node
+10. Stop the Selenium grid (hub & node)
 
     ```bash
-    fab stop_hub_node
+    fab grid_stop
     ```
 
-10. Type `exit` to quit the virtual machine
+11. Start Selenium standalone instance
 
-11. To halt the VM type (fast to startup after a halt command)
+    ```bash
+    fab standalone_start
+    ```
+
+12. Open the browser to http://192.168.33.10:4444/wd/hub
+
+
+13. Run the Selenium test (takes about 5 seconds). Click the "Refresh sessions"
+button to see the sessions started.
+
+    ```bash
+    fab run_test
+    ```
+
+14. Stop the Selenium standalone instance
+
+    ```bash
+    fab standalone_stop
+    ```
+
+15. Type `exit` to quit the virtual machine
+
+16. To halt the VM type (fast to startup after a halt command)
 
     ```
     vagrant halt
     ```
 
-12. To destroy the VM (slow to create VM after a destroy command)
+17. To destroy the VM (slow to create VM after a destroy command)
 
     ```
     vagrant destroy
