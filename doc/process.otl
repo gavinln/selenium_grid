@@ -1,0 +1,17 @@
+Jenkins standalone
+	run docker container - https://registry.hub.docker.com/_/jenkins/
+	install swarm plugin manually
+Nodejs docker
+	run docker container https://registry.hub.docker.com/_/node/
+	install git
+	get code
+	install 
+		install npm packages
+		install bower packages
+	run unit test
+Setup Nodejs docker as Jenkins slave with swarm
+	
+
+
+
+	

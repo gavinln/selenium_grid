@@ -1,0 +1,5 @@
+cislave:
+    build: .
+    environment:
+        MASTER_PORT_8080_TCP_ADDR: 192.168.33.10
+        MASTER_PORT_8080_TCP_PORT: 8080
