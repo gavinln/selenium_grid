@@ -34,3 +34,12 @@ sudo mkdir /srv/pictures
 
 2. Set the correct permissions
 sudo chmod 777 /srv/pictures
+
+Jenkins job
+echo "hello"
+cd js
+npm install
+bower install --allow-root
+npm-cache install npm
+npm install gulp
+grunt test
