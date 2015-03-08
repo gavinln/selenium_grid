@@ -14,7 +14,7 @@ class {
     init: ;
     python_setup:;
     ohmyzsh_setup:;
-    docker: require => Class[init];
+    docker_setup: require => Class[init];
     samba_share: require => Class[init];
 }
 
