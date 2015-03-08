@@ -5,4 +5,4 @@ ciserver:
         - "8080:8080"
         - "50000:50000"
     volumes:
-        - ./jenkins_home:/var/jenkins_home
+        - /home/vagrant/jenkins_home:/var/jenkins_home
